@@ -1,7 +1,6 @@
 // shoe object
 
 var Shoe = function() {
-
 	// properties
 	this.decks = [];													// array of cards inserted a deck at a time
 															// but not a two-level array
@@ -40,7 +39,7 @@ var Shoe = function() {
 
 	this.shuffle = function() {
 		shuffle(this.decks);											// shuffle function. Not my code.
-
+															// this operates on the cards in place. no new variable needed.
 		// USE THIS TO SHUFFLE YOUR NUMBERS
 		//+ Jonas Raoni Soares Silva
 		//@ http://jsfromhell.com/array/shuffle [v1.0]

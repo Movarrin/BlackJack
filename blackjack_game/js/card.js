@@ -14,6 +14,11 @@ var Card = function  (suit, value, face) {
 		return state;											// whatever it cuurrently is, make it the opposite.
 	};
 
+
+	this.getValue = function () {
+		return	this.value;										// return the value of the card.
+	};
+
 	this.render = function() {
 		if (this.state) {
 			return this.face;									// return the face of the card
@@ -22,10 +27,5 @@ var Card = function  (suit, value, face) {
 		}
 
 	};
-
-	this.getValue = function () {
-		return	this.value;										// return the value of the card.
-	};
-
 
 };

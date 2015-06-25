@@ -1,9 +1,10 @@
 // deck object
 
 var Deck = function () {
-
+	//properties
 	this.cards = [];													// array of card objects
 
+	// behaviors
 	this.makeDeck = function () {
 		var cardSuits	= ["spades", "'clubs", "hearts", "diamonds"];						// literal array of suits
 		var cardValues = [2,    3,    4,   5,    6,    7,    8,    9,    10,   10, 10,  10,  11];				// literal array of values
