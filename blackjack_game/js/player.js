@@ -6,14 +6,34 @@ var Player = function  () {
 	this.hands = [];													// can be more than one hand per player
 	this.bet = [0];													// one bet per hand, 
 	this.doubleDown = [0];												// one double down per hand
-	this.insurance = [0];												// one insurance per hand												
+	this.insurance = [0];												// one insurance per hand
+	this.handsWon = 0;												// hands won by players
+	this.handsLost = 0;												// hands won by players
+	this.handsPushed = 0;												// hands tied with dealer												
 
 
 	//behaviors	
 	this.playerAddHand = function () {
 		var newHand = new Hand();										// create new hand
 		this.hands.push(newHand);										// push it into hands array
-	}
+		return;
+	};
+
+	this.playerWon = function () {
+		this.handsWon++;											// increment hands won
+		return this.handsWon;
+	};
+
+	this.playerLost = function () {
+		this.handsLost++;											// increment hands lost
+		return this.handsLost;
+	};
+
+	this.playerPush = function () {
+		this.handsPushed++;											// increment hands pushed
+		return this.handsPushed;
+	};
+
 	this.playerHit = function (idx, card) {										// add card to hand
 		this.hands[idx].handHit(card);										// call hand.handHit
 		return;
@@ -40,7 +60,7 @@ var Player = function  () {
 	};	
 
 	this.playerHasBusted = function (idx) {
-			return this.hands[idx].handHasBusted();							// call handHasBusted and return result
+		return this.hands[idx].handHasBusted();								// call handHasBusted and return result
 	};
 	
 	this.playerRender = function (idx) {
@@ -68,18 +88,18 @@ var Player = function  () {
 
 			case "insurance": 
 
-				if (amt > this.bank[idx]) {								// if amount is greater than bank
+				if (amt > this.bank) {									// if amount is greater than bank
 					return false;									// return false;
 				}
 
 
-				this.bank[idx] -= amt; 									// decrease bank by amount
+				this.bank -= amt; 									// decrease bank by amount
 				this.insurance[idx] = amt;								// insurance = amt				
 				return true;										// confirm
 
 			case "doubleDown":
 				
-				if (amt > this.bank[idx]) {								// if amount is greater than bank
+				if (amt > this.bank) {									// if amount is greater than bank
 					return false;									// return false;
 				}
 
@@ -89,11 +109,11 @@ var Player = function  () {
 
 			case "bet":
 
-				if (amt > this.bank[idx]) {								// if amount is greater than bank
+				if (amt > this.bank) {									// if amount is greater than bank
 					return false;									// return false
 				}
 
-				this.bank[idx] -= amt;									// subtract from bank
+				this.bank -= amt;									// subtract from bank
 				this.bet[idx] = amt;									// set bet
 				return true;										// confirm
 
@@ -111,7 +131,7 @@ var Player = function  () {
 		
 		for (var i = 0; i < this.hands.length; i++) {								// for each player hand
 			this.hands[i].push(game.shoe.shoeDeal());							// get a card from the shoe and put in each hand.
-		};
+		}
 
 	};
 	

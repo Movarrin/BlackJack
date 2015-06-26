@@ -2,8 +2,8 @@
 
 var Shoe = function() {
 	// properties
-	this.decks = [];													// array of cards inserted a deck at a time
-															// but not a two-level array
+	this.decks = [];	
+	this.shoe = new Shoe ();
 	this.numOfDecks = 1;												// controller for how many decks. allows extensibility
 
 	// behaviors
