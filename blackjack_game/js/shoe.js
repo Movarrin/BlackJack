@@ -37,6 +37,10 @@ var Shoe = function() {
 
 	};
 
+	this.shoeDeal = function () {
+		return this.decks.pop();
+	};
+
 	this.shuffle = function() {
 		shuffle(this.decks);											// shuffle function. Not my code.
 															// this operates on the cards in place. no new variable needed.

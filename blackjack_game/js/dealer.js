@@ -1,1 +1,1 @@
-// dealer object
+// deprecated object

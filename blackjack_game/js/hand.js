@@ -15,6 +15,15 @@ var Hand = function() {
 
 
 	// behaviors
+	this.handHit = function (card) {									// add card to hand
+		this.cards.push(card);										// add card to hand
+		return card;
+	};
+
+	this.handSplit = function () {										
+		return this.cards.pop();										// remove card from hand 	
+	};
+
 	this.determineValue = function() {
 		this.totValAceHigh = 0;									// at the beginning reset all of the 
 		this.totValAceLow = 0;										// objects accumulators when
@@ -94,10 +103,12 @@ var Hand = function() {
 		if ((this.cards.length === 2)     && 								// hand is only 2 cards							
 		    (this.totValAceHigh === 21) && 								// the value is 21 (can only happen with Ace + 10)
 		    (!this.handHasSplit)) {									// hand hasn't split. 21 on split doesn't pay blackjack																
-			this.handDoesHaveBlackjack = true;							// return answer					
+			this.handDoesHaveBlackjack = true;							// has blackjack					
 		} else {
-			this.handDoesHaveBlackjack = false;							// return answer			
+			this.handDoesHaveBlackjack = false;							// does not have blackjack			
 		}
+
+		return this.handDoesHaveBlackjack;								// return answer
 	};
 
 	this.handHasBusted = function () {									// determine if busted
