@@ -47,7 +47,9 @@ var Player = function  () {
 		switch (action) {
 			case "cashIn": 											//fallthrough
 			case "winMoney": 										// do for either case.
-				this.bank[idx] += (bet * factor);							// add money to bank					
+				this.bank[idx] += (bet * factor);							// add money to bank	
+				this.doubleDown[idx] = 0;								// clear doubleDown
+				this.bet[idx] = 0;									// clear bet			
 				return true;										// confirm
 
 			case "insurance": 
@@ -68,7 +70,7 @@ var Player = function  () {
 				}
 
 				this.bank[idx] -= (bet * factor);								// subtrace from bank
-				this.doubleDown[idx] = (bet * factor);							// set doubleDown
+				this.doubleDown[idx] = bet + (bet * factor);						// set doubleDown double the bet
 				return true;										// confirm
 
 			case "bet":
@@ -85,9 +87,19 @@ var Player = function  () {
 				this.bet[idx] = 0;									// lose bet
 				return true;										// confirm
 
+			case "winInsurance":
+				this.bank += (this.insurance[idx] * factor);						// pay off insurance
+				this.insurance[idx]  = 0;								// clear insurance
+				return true;										// confirm
+
+			case "loseInsurance":
+				this.insurance[idx] = 0;								// lose insurance
+				return true;										// confirm
+
 			case "cashOut": 										// precede by this.getBank
 				bank = 0;										// set bank to zero
 				return true;										// confirm
+
 		}
 	};
 		
@@ -105,7 +117,7 @@ var Player = function  () {
 
 	// getter functions
 	this.playerGetValue = function (idx) {
-		return this.hand.getValue();										// return hand value for given hand
+		return this.hands[idx].getValue();										// return hand value for given hand
 	};
 
 	this.playerHasBlackjack = function (idx) {
@@ -131,8 +143,10 @@ var Player = function  () {
 	this.playerRender = function (idx) {
 		var playRender = [];
 
-		for (var  i = 0; i < this.hands.length; i++) {
-			playRender.push(this.handRender(idx));								// return current state of hand
+		for (var i = 0; i < this.hands.length; i++) {
+			
+		playRender.push(this.hands[i].renderHand());						// return current state of hand
+		
 		}
 
 		return playRender;

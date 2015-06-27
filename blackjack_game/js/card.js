@@ -12,17 +12,17 @@ var Card = function  (suit, value, face) {
 	// setter functions
 	this.showFace = function () {
 		this.state = true;	
-		return state;											// whatever it cuurrently is, make it the opposite.
+		return this.state;											// whatever it cuurrently is, make it the opposite.
 	};
 
 	this.hideFace = function () {
 		this.state = false;
-		return state;
+		return this.state;
 	};
 
 	// getter functions
 	this.getState = function () {
-		return state;
+		return this.state;
 	};
 
 	this.getValue = function () {

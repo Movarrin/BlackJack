@@ -143,16 +143,24 @@ var Hand = function() {
 
 	// getter functions
 	this.renderHand = function () {
-		var renderedHand = "";									// clear current render
+		var renderedHand = [];										// clear current render
 
 		for (var i = 0; i < this.cards.length; i++) {							// for each card in hand
-			renderedHand = renderedHand + this.cards[i].render();				// get it's render and append to renderedHand
+			renderedHand.push( this.cards[i].render() );						// get it's render and append to renderedHand
 		}
 		return (renderedHand);										// return renedered hand
 	};
 
 	this.getValue = function () {
-		return ([this.totValAceLow, this.totValAceHigh, this.handHasAce]);				// return value of hand
+
+		if ( !this.handHasAce ) {									// if no ace
+			return this.totValAceHigh;								// there is only 1 value
+		} else if ( totValAceHigh > 21 ) {								// else with the ace = 11 hand busted
+			return this.totValAceLow;								// return value with Ace =1 
+		} else if ( ( this.handHasAce ) && (totValAceHigh <= 21) ){ 					// else with ace = 11
+			return totValAceHigh;									// return value
+		}
+
 	};
 
 	this.getHandSplit = function () {

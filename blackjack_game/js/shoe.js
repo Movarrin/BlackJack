@@ -3,11 +3,11 @@
 var Shoe = function() {
 	// properties
 	this.decks = [];	
-	this.shoe = new Shoe ();
 	this.numOfDecks = 1;												// controller for how many decks. allows extensibility
 
 	// behaviors
-	this.addDeck = function () {
+	this.addDeck = function (numofDecks) {
+		this.numOfDecks = numofDecks;									//  set number of decks to make
 
 		// create deck and add to array
 		for (var i = 0; i < this.numOfDecks; i++) {								//  one per numOfDecks
@@ -23,10 +23,6 @@ var Shoe = function() {
 		return this.decks;											// return
 	};
 
-	this.selectNumOfDecks = function(num) {
-		this.numOfDecks = parseInt(num);									// change number of decks in shoe
-		return this.numOfDecks;										// return
-	};
 
 	this.checkForOutOfCards = function() {									
 		if (this.decks.length < 1) {										// if length of decks is 0
