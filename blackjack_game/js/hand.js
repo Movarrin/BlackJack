@@ -1,4 +1,4 @@
-// handy object
+// hand object
 
 var Hand = function() {
 	//properties
@@ -8,13 +8,16 @@ var Hand = function() {
 	this.handHasAce = 0;											// count Aces in hand
 	this.handCanSplit = false;										// boolean indicates splitable hand
 	this.handCanDoubleDown = false;									// boolean indicates if player can double down
+	this.handDoubledDown = false;
 	this.handCanInsure = false;										// if dealer's up card is Ace
+	this.handInsured = true;
 	this.handDoesHaveBlackjack = false;									// two cars equaling 21 and one must be an Ace.
 	this.handHasSplit = false;										// if hand has split, do not pay out blackjack
 	this.handBusted = false;										// is value over 21?
 
 
 	// behaviors
+	// setter functions
 	this.handHit = function (card) {									// add card to hand
 		this.cards.push(card);										// add card to hand
 		return card;
@@ -55,9 +58,6 @@ var Hand = function() {
 		return ([this.totValAceLow, this.totValAceHigh, this.handHasAce]);				// return value of hand
 	};
 
-	this.getValue = function () {
-		return ([this.totValAceLow, this.totValAceHigh, this.handHasAce]);				// return value of hand
-	};
 
 	this.canHandSplit = function () {									// determine if first 2 cards dealt are the same
 
@@ -87,6 +87,7 @@ var Hand = function() {
 		return this.handCanDoubleDown;								// return answer
 	};
 
+
 	this.canHandInsure = function () {									// for dealer only
 
 		if (this.cards[1].face === "A") {								// if the dealer's up card is an Ace
@@ -114,12 +115,33 @@ var Hand = function() {
 	this.handHasBusted = function () {									// determine if busted
 		if (this.totValAceLow > 21) {									// if even with ace counted as one
 			this.handHasBusted = true;								// hand busted
+			this.totValAceLow = 0;									// busted hand has no value
+			this.totValAceHigh = 0;								// busted hand has no value
 		} else {
 			this.handHasBusted = false;								// hasn't busted
 		}
 		return this.handHasBusted;									// return answer
 	};
 
+	this.setDoubleDown = function () {
+		this.handDoubledDown = true;
+		return this.handDoubledDown;
+	};
+
+	this.setInsured = function () {
+		this.handInsured = true;
+		return this.handInsured;
+	};
+
+	this.showFace = function (idx) {
+		return this.cards[idx].showFace();
+	};
+
+	this.hideFace = function (idx) {
+		return this.cards[idx].hideFace();
+	};
+
+	// getter functions
 	this.renderHand = function () {
 		var renderedHand = "";									// clear current render
 
@@ -129,5 +151,23 @@ var Hand = function() {
 		return (renderedHand);										// return renedered hand
 	};
 
+	this.getValue = function () {
+		return ([this.totValAceLow, this.totValAceHigh, this.handHasAce]);				// return value of hand
+	};
+
+	this.getHandSplit = function () {
+		return this.handHasSplit;
+	};
+
+	this.gethandBusted = function () {
+		return this.handBusted;
+	};
+	this.getHandDoesHaveBlackjack = function () {
+		return this.handDoesHaveBlackjack;
+	};
+
+	this.getHandDoubledDown = function () {
+		return this.handDoubledDown;
+	};
 
 };

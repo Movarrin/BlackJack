@@ -2,10 +2,13 @@
 
 var Game = {
 	// properties
-	players: [],
-	shoe: {},
-	numOfDecks: 1,
-	activePlayerIdx: 0,
+	players: [],													// array of player objects. Dealer is [0]
+	shoe: {},													// object containing array of cards
+	numOfDecks: 1,		
+	activePlayerIdx: 0,												// this is to keep track which player turn
+	blackjackFactor: 2.5,												// blackjack pay factor
+	insuranceFactor: 2,												// insurance factor
+	gameFactor: 2,													// game factor
 
 	// behaviors
 
@@ -42,10 +45,10 @@ var Game = {
 			this.players[i].playerRender();
 		}
 
-	},
+	},	
 
 	/* this is an inside-out loop, it stops at each player, giving them each 1 card starting with the player first
-		before dealing a second card to each. There are only 2 cards per hand. Dealer is alway game.players[0];*/
+		before dealing a second card to each. There are only 2 cards per hand. Dealer is alway game.playerers[0];*/
 	gameDeal: function () {
 
 		for (var i = 0; i < 2; i++) {										// 2 cards in each hand
@@ -63,7 +66,7 @@ var Game = {
 
 	},
 
-	gameIsOver: function () {											// run through rules to check for win.
+	gameResult: function () {											// run through rules to check for win.
 		var dealerBlackjack = game.players[0].playerHasBlackjack(0);					// see if dealer has blackjack								
 		var dealerBust = game.players[0].player.playerHasBusted(0);						// see if dealer has busted
 		var dealerHandValue = game.players[0].player.playerGetValue(0);					// get hand value									//
@@ -75,23 +78,37 @@ var Game = {
 
 			for (var j = 0; j < game.players[i].hands.length; j++) {					// loop through each player's hand
 			
-			playerBlackjack.push(game.players[i].hands[j].playerHasBlackjack(J));
-			playerBlackjack.push(game.players[i].hands[j].playerHasBusted(J));
-			playerBlackjack.push(game.players[i].hands[j].playerGetValue(J));
+			playerBlackjack.push(game.players[i].hands[j].playerHasBlackjack(J));				// find out if blackjack and push into arry
+			playerBlackjack.push(game.players[i].hands[j].playerHasBusted(J));				// find out if busted and push into array
+			playerBlackjack.push(game.players[i].hands[j].playerGetValue(J));				// get hand value and push into array
 
 
+			I left off here. Need to clear insurance and double down on win or loss. 
+			currently missing processing.
+
+
+
+			if (playerBust) {										// if busted he loses regardless of anything else.								
+				this.players[i].playerAdjustFunds(j, "lose", 1); 						// call with hand idx, action and factor
+				return ("bust");										// return bust
+			} else if (game.dealerHandValue == game.playerHandValue[l]) {				// --> push <--
+				this.players[i].playerAdjustFunds(j, "winMoney", 1); 					// return bet to bank.
+				return "winMoney";									// confirm
+		
+			} else if (game.dealerHandValue > game.playerHandValue[l]){				// player loses.
+				this.players[i].playerAdjustFunds(j, "lose", 1); 						// call with hand idx, action and factor
+				return ("lose");										// return lose
+
+			} else if (game.dealerHandValue < game.playerHandValue[l]){
+
+				if (game.playerBlackjack[l]) {
+					game.gameHandBlackjack();	//write this function						//
+				}else {
+					game.gameHandWins();	// write this function
+				}
 			}
+		
 		}
-
-		for (var i = 0; i < game.players.length; i++) {
-			
-			if ((game.dealerBlackjack) && (game.playerBlackjack)) {
-				this.gameHandPush();
-			}
-		};
-
-
-
 	},
 
 	gamePlayerTurns: function () {

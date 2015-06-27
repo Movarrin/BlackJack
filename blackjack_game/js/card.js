@@ -9,11 +9,21 @@ var Card = function  (suit, value, face) {
 	this.suit = suit;												// suit of the card may not be needed. can't hurt
 
 	// behaviors
+	// setter functions
 	this.showFace = function () {
-		this.state = !this.state;	
+		this.state = true;	
 		return state;											// whatever it cuurrently is, make it the opposite.
 	};
 
+	this.hideFace = function () {
+		this.state = false;
+		return state;
+	};
+
+	// getter functions
+	this.getState = function () {
+		return state;
+	};
 
 	this.getValue = function () {
 		return	this.value;										// return the value of the card.
