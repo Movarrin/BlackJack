@@ -5,7 +5,8 @@ html, body {
 }
 
 .background {
-	background: #000000 url('/home/andrew/Downloads/Axial-M3-Black-Right.jpg') no-repeat bottom left;
+	/*background: #000000 url('/home/andrew/Downloads/blackboop.jpg') no-repeat bottom left;*/
+	background: #000000 url('/home/andrew/Downloads/table.png') no-repeat bottom left;
 	background-size: 100% 100%;
 	width: 100%;
 	/*height: 100%;*/
@@ -15,7 +16,7 @@ html, body {
 
 .info-bar {
 	position: fixed;
-	height: 5%;
+	height: 6%;
 	width: 100%;
 	background-color: black;
 	text-align: center;
@@ -103,7 +104,7 @@ html, body {
 	margin: 5px;
 	margin-left: 10px;
 	padding: 5px;
-	left: 17%;
+	left: 25%;
 	position: relative;
 	border-radius: 50%;
 	text-align: center;
@@ -112,4 +113,37 @@ html, body {
 
 
 }
+.cards-holder {
+	min-width: 99%;
+	min-height: 691px;
 
+}
+
+.cards {
+	max-width: 72px;
+	max-height: 90px;
+	width: 72px;
+	height: 90px;
+}
+
+#cardback {
+	min-width: 72px;
+	max-width: 72px;
+	min-height: 90px;
+	max-height: 90px;
+	border-radius: 8%;
+}
+
+.dealer-hand {
+	display: inline-flex;
+	left: 60%;
+	top: 285px;
+	position: relative;
+}
+
+.player-hand {
+	display: inline-flex;
+	left: 39%;
+	top: 399px;
+	position: relative;
+}

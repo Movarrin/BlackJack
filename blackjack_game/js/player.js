@@ -1,4 +1,5 @@
 // player object
+console.log("player loaded");
 
 var Player = function  () {		
 	// properties

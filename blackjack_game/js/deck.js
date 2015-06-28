@@ -1,4 +1,5 @@
 // deck object
+console.log("deck loaded");
 
 var Deck = function () {
 	//properties

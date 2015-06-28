@@ -1,4 +1,5 @@
 // game object
+console.log("loaded game");
 
 var game = {
 	// properties

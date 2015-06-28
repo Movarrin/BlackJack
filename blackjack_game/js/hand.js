@@ -1,4 +1,5 @@
 // hand object
+console.log("hand loaded");
 
 var Hand = function() {
 	//properties

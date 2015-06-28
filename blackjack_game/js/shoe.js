@@ -1,4 +1,5 @@
 // shoe object
+console.log("shoe loaded");
 
 var Shoe = function() {
 	// properties
