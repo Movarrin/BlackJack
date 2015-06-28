@@ -2,10 +2,50 @@
 <html>
 <head>
 	<title>Blackjack</title>
-	<!-- <link rel="stylesheet" href="css/style.css"> -->
+	<link rel="stylesheet" href="css/styles.css">
 	<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
 	</head>
-<body>
+<body class="background">
+	<div class="info-bar top-info">
+		<div class="game-msg">
+			<div class="hand-info hands-won">Won: <br>10</div>
+			<div class="hand-info hand-info hands-lost">Lost: <br>10</div>
+			<div class="hand-info pushed">Pushes: <br>10</div>
+		</div>
+		<div class="game-msg messages">End    of     a  really long message</div>
+		<div class="game-msg"></div>
+	</div>
+
+	<div class="tabletop">
+		
+		<div class="buttons">
+			<div class="btn"> Cash In</div>
+			<div class="btn"> Insurance</div>
+			<div class="btn"> Bet</div>
+			<div class="btn"> Hit</div>
+			<div class="btn"> Stand</div>
+			<div class="btn"> Split</div>
+			<div class="btn"> Deal</div>
+			<div class="btn"> Double Down</div>
+			<div class="btn"> Cash Out</div>
+		</div>
+	</div>
+	<div class="clears"></div>
+
+
+
+	<div class="info-bar bottom-info">
+
+		<div class="player-monies" id="bank">Bank:<br>$75,000.00</div>
+		<div class="player-monies" id="bet">Player Bet:<br>$50.00</div>
+		<div class="player-monies" id="bet">Player Split Bet:<br>$50.00</div>
+		<div class="player-monies" id="insurance">Player Insurance Bet:<br>$50.00</div>
+
+
+	</div>
+	
+
+
 
 	<script src="js/card.js"></script>
 	<script src="js/deck.js"></script>

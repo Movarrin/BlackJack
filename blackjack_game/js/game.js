@@ -17,8 +17,7 @@ var game = {
 		this.gamePlayerCreate(1);
 		this.gameMakeDecks();
 		this.shoe.shuffle();
-		this.gameDeal();
-		this.gameRender();
+		
 
 	},
 
@@ -73,6 +72,8 @@ var game = {
 		}
 
 		this.players[ 0 ].hands[ 0 ].cards[ 1 ].hideFace();							// make sure dealer's 2nd card is hidden.
+		this.gameDetermineHandValues();									// determine each hands value
+		return;
 
 	},
 	gameDetermineHandValues: function () {
@@ -82,6 +83,14 @@ var game = {
 			for (var n = 0; n < game.players[ m ].hands.length; n++) {					// and each hand of each player
 
 				game.players[ m ].hands[ n ].determineValue();					// figure the value of the hand
+				game.players[ m ].hands[ n ].canHandSplit();						// can hand split
+				game.players[ m ].hands[ n ].canHandDoubleDown();					// can hand split
+				game.players[ m ].hands[ n ].canHandInsure();					// can hand split
+				game.players[ m ].hands[ n ].canHandInsure();					// can hand split
+				game.players[ m ].hands[ n ].handHasBlackjack();					// can hand split
+				game.players[ m ].hands[ n ].handHasBusted();					// can hand split
+
+
 			}
 			
 		}
@@ -165,29 +174,32 @@ var game = {
 
 	},*/
 
-	/*gameCashIn: function () {
+	// gameCashIn: function () {
 
-	},
+	// },
 
-	gameCashOut: function () {
+	// gameCashOut: function () {
 
-	},
+	// },
 
 	gamePlayerAction: function () {
-		insurance hit;
-		stand;
-		deal;
-		doubledown;
-		split;
-		hit;
-		cash in
+		this.gameDeal();
+		this.gameRender();
+
+		// insurance hit;
+		// stand;
+		// deal;
+		// doubledown;
+		// split;
+		// hit;
+		// cash in
 
 	},
 
-	gameAdjustMoney: function () {
-		cash out
+	// gameAdjustMoney: function () {
+	// 	cash out
 
-	}*/
+	// }
 
 
 
