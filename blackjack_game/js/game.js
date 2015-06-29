@@ -97,8 +97,9 @@ var game = {
 		
 
 		for ( var i = 0; i < this.players.length; i++ ) {
-			this.gameRendered.push( this.players[ i ].playerRender( i ) );
+			this.gameRendered.push( this.players[ i ].playerRender( i ) );			
 		}
+
 		return this.gameRendered;
 
 	},	
@@ -118,6 +119,10 @@ var game = {
 			}
 		}
 
+		$("#dlr-hole").css("visibility", "visible");
+		$("#dlr-up").css("visibility", "visible");
+		$("#ply-up1").css("visibility", "visible");
+		$("#ply-up2").css("visibility", "visible");
 		this.players[ 0 ].hands[ 0 ].cards[ 1 ].hideFace();							// make sure dealer's 2nd card is hidden.
 		this.gameDetermineHandValues();									// determine each hands value
 		return;
@@ -233,7 +238,7 @@ var game = {
 	// },
 
 	gamePlayerBet: function () {
-		this.player[1].playerAdjustFunds(1, "bet", 1) ;
+		this.players[1].playerAdjustFunds(0, "bet", 1) ;
 	},
 
 	// gameAdjustMoney: function () {

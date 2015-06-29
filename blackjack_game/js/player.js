@@ -48,32 +48,32 @@ var Player = function  () {
 		switch (action) {
 			case "cashIn": 											
 
-				this.bank = (50000 * factor);							// put 50 K in bank
+				this.bank = (50000 * factor);								// put 50 K in bank
 				this.doubleDown[idx] = 0;								// clear doubleDown
 				this.bet[idx] = 0;									// clear bet		
 				this.insurance[idx] = 0;								// clear insurance	
 				return true;										// confirm
 				
 			case "winMoney": 										// do for either case.
-				this.bank += (bet * factor);							// add money to bank	
+				this.bank += (bet * factor);								// add money to bank	
 				this.doubleDown[idx] = 0;								// clear doubleDown
 				this.bet[idx] = 0;									// clear bet			
 				return true;										// confirm
 
 			case "insurance": 
 
-				if (amt > this.bank) {									// if amount is greater than bank
+				if (bet[idx] > this.bank) {								// if amount is greater than bank
 					return false;									// return false;
 				}
 
 
 				this.bank -= (this.bet * factor);								// decrease bank by amount
-				this.insurance[idx] = (this.bet * factor);						// insurance = amt				
+				this.insurance[idx] = (this.bet * factor);						// insurance = bet				
 				return true;										// confirm
 
 			case "doubleDown":
 				
-				if (amt > this.bank) {									// if amount is greater than bank
+				if (bet[idx] > this.bank) {								// if amount is greater than bank
 					return false;									// return false;
 				}
 
@@ -83,12 +83,12 @@ var Player = function  () {
 
 			case "bet":
 
-				if (amt > this.bank) {									// if amount is greater than bank
+				if (bet[idx] > this.bank) {								// if amount is greater than bank
 					return false;									// return false
 				}
 
 				this.bank -= (5 * factor);								// subtract from bank
-				this.bet[idx] =(5 * factor);								// set bet
+				this.bet[idx] += (5 * factor);								// set bet
 				return true;										// confirm
 													
 			case "split":

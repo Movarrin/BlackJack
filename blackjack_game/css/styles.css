@@ -132,7 +132,7 @@ html, body {
 	padding-left: 2px;
 }
 
-#cardback {
+.cardback {
 	min-width: 72px;
 	max-width: 72px;
 	min-height: 110%;
@@ -142,18 +142,28 @@ html, body {
 	padding-left: 2px;
 }
 
-.dealer-hand {
+.hand0 {
 	display: inline-flex;
-	left: 60%;
-	top: 285px;
+	left: 45%;
+	top: 276px;
 	position: relative;
+	visibility: hidden;
 }
 
-.player-hand {
+.hand1 {
 	display: inline-flex;
-	left: 39%;
+	left: 20%;
 	top: 399px;
 	position: relative;
+	visibility: hidden;
+}
+
+.hand2 {
+	display: inline-flex;
+	left: 20%;
+	top: 399px;
+	position: relative;
+	visibility: hidden;
 }
 
 .btn-img {	
