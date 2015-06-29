@@ -159,7 +159,7 @@ var Hand = function() {
 		} else if ( this.totValAceHigh > 21 ) {								// else with the ace = 11 hand busted
 			return this.totValAceLow;								// return value with Ace =1 
 		} else if ( ( this.handHasAce ) && (this.totValAceHigh <= 21) ){ 					// else with ace = 11
-			return this.totValAceHigh;									// return value
+			return this.stotValAceHigh;									// return value
 		}
 
 	};

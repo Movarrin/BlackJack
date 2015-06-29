@@ -11,7 +11,7 @@ var Deck = function () {
 		var cardValues = [2,    3,    4,   5,    6,    7,    8,    9,    10,   10, 10,  10,  11];				// literal array of values
 		var cardFaces = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];				// literal array of faces
 		var imgFace = "";
-		var imgLink = "/home/andrew/BlackJack/blackjack_game/img/";
+		var imgLink = "img/";
 
 		for (var i = 0; i < cardSuits.length; i++) {								// for each suit
 			

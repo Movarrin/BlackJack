@@ -6,7 +6,7 @@ var Card = function  (suit, value, face, imgFace) {
 	this.value = value;											// the value of the card 1 to 13
 	this.state = true;											// true is face up, false is face down
 	this.face = face;											// the face of the card
-	this.back = "/home/andrew/BlackJack/blackjack_game/img/cardback.png";				// link to back of the card?
+	this.back = "img/cardback.png";				// link to back of the card?
 	this.suit = suit;												// suit of the card may not be needed. can't hurt
 	this.faceImg = imgFace;
 
