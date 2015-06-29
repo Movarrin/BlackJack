@@ -16,6 +16,7 @@ var game = {
 
 	gameStart: function () {
 		this.gamePlayerCreate(1);
+		this.gameCashIn();
 		this.gameMakeDecks();
 		this.shoe.shuffle();
 		
@@ -26,7 +27,6 @@ var game = {
 															// for now, hard coded to 1.
 		for (var i = 0; i < ( num + 1 ); i++) {									// for num times, plus one more for the dealer.
 			var gamePlayer = new Player();								// create new player object
-			gamePlayer.playerAddHand();									// create a new hand object for player			
 
 			this.players.push( gamePlayer );								// push into the player array
 		}
@@ -39,6 +39,52 @@ var game = {
 		this.shoe.addDeck( this.numOfDecks );									// shoe will create decks and shuffle cards.
 		
 
+	},
+
+	gameMsg: function () {
+		$(".hands-won").html("Won:<br />" + this.players[1].getPlayerWon());
+		$(".hands-lost").html("Lost:<br />" + this.players[1].getPlayerLost());
+		$(".pushed").html("Pushed:<br />" + this.players[1].getPlayerTied());
+
+	},
+
+	gameBanner: function (idx) {
+		var gameBanners = [
+			"Press 'Bet' to increase bet by $5.00. Press 'Deal' when ready for hand.",			// 0
+			"Press 'Insurance' if you want to buy Insurance against Dealer Blackjack!"	,		// 1
+		];
+
+		var  bannerColors = [
+			"cornflowerblue",										// 0
+			"red",												// 1
+		];
+
+		$(".banner").html(gameBanners[idx]).css("color", bannerColors[idx]);
+	},
+
+	gameBottomBanner: function () {
+		var holdPlayerSplit = 0;
+
+		if (this.players[1].hands[0].handHasSplit) {								// if the hand has split
+
+			holdPlayerSplit = this.player[1].getBet(1);							// bet [1] is split bet
+		}
+		
+		$("#bank").html( "Bank:<br>$" + this.players[ 1 ].getPlayerBank() + ".00");				// get bank.
+		$("#bet").html("Player Bet:<br>$" +  this.players[1].getBet(0) + ".00");				// get bet. bet index [0] is main bet.
+		$("#split").html("Player Split Bet:<br>$" + holdPlayerSplit + ".00");					// bet [1] is split bet.
+		$("#insurance").html("Player Insurance Bet:<br>$" + this.players[1].getInsurance(0) + ".00");		// get insurance.
+
+
+	},
+
+	gameAddHands: function () {
+
+		for (var i = 0; i < this.players.length; i++) {								// for each player
+			this.players[ i ].playerAddHand();								// create a hand
+		}
+
+		return "hands created";
 	},
 
 	gameCheckForOutOfCards: function () {									// check for cards present
@@ -175,26 +221,19 @@ var game = {
 
 	},*/
 
-	// gameCashIn: function () {
+	gameCashIn: function () {
+		for (var i = 1; i < this.players.length; i++) {								// skipping deal give each player 50K
+			this.players[ i ].playerAdjustFunds( i, "cashIn", 1 );
+		}
 
-	// },
+	},
 
 	// gameCashOut: function () {
 
 	// },
 
-	gamePlayerAction: function () {
-		this.gameDeal();
-		this.gameRender();
-
-		// insurance hit;
-		// stand;
-		// deal;
-		// doubledown;
-		// split;
-		// hit;
-		// cash in
-
+	gamePlayerBet: function () {
+		this.player[1].playerAdjustFunds(1, "bet", 1) ;
 	},
 
 	// gameAdjustMoney: function () {

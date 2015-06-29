@@ -9,9 +9,9 @@ var Player = function  () {
 	this.stand = [false];
 	this.doubleDown = [0];												// one double down per hand
 	this.insurance = [0];												// one insurance per hand
-	this.playerHandsWon = 0;												// hands won by players
-	this.playerHandsLost = 0;												// hands won by players
-	this.playerHandsTied = 0;												// hands tied with dealer												
+	this.playerHandsWon = 0;											// hands won by players
+	this.playerHandsLost = 0;											// hands won by players
+	this.playerHandsTied = 0;											// hands tied with dealer												
 
 
 	//behaviors	
@@ -24,17 +24,17 @@ var Player = function  () {
 	};
 
 	this.playerWon = function () {
-		this.playerHandsWon++;											// increment hands won
+		this.playerHandsWon++;										// increment hands won
 		return this.playerHandsWon;
 	};
 
 	this.playerLost = function () {
-		this.playerHandsLost++;											// increment hands lost
+		this.playerHandsLost++;										// increment hands lost
 		return this.playerHandsLost;
 	};
 
 	this.playerPush = function () {
-		this.playerHandsTied++;											// increment hands pushed
+		this.playerHandsTied++;										// increment hands pushed
 		return this.playerHandsTied;
 	};
 
@@ -46,9 +46,16 @@ var Player = function  () {
 
 	this.playerAdjustFunds = function (idx, action, factor) {
 		switch (action) {
-			case "cashIn": 											//fallthrough
+			case "cashIn": 											
+
+				this.bank = (50000 * factor);							// put 50 K in bank
+				this.doubleDown[idx] = 0;								// clear doubleDown
+				this.bet[idx] = 0;									// clear bet		
+				this.insurance[idx] = 0;								// clear insurance	
+				return true;										// confirm
+				
 			case "winMoney": 										// do for either case.
-				this.bank[idx] += (bet * factor);							// add money to bank	
+				this.bank += (bet * factor);							// add money to bank	
 				this.doubleDown[idx] = 0;								// clear doubleDown
 				this.bet[idx] = 0;									// clear bet			
 				return true;										// confirm
@@ -60,8 +67,8 @@ var Player = function  () {
 				}
 
 
-				this.bank -= (bet * factor);								// decrease bank by amount
-				this.insurance[idx] = (bet * factor);							// insurance = amt				
+				this.bank -= (this.bet * factor);								// decrease bank by amount
+				this.insurance[idx] = (this.bet * factor);						// insurance = amt				
 				return true;										// confirm
 
 			case "doubleDown":
@@ -70,8 +77,8 @@ var Player = function  () {
 					return false;									// return false;
 				}
 
-				this.bank[idx] -= (bet * factor);								// subtrace from bank
-				this.doubleDown[idx] = bet + (bet * factor);						// set doubleDown double the bet
+				this.bank -= (bet * factor);								// subtrace from bank
+				this.doubleDown[idx] = this.bet + (this.bet * factor);					// set doubleDown double the bet
 				return true;										// confirm
 
 			case "bet":
@@ -80,8 +87,18 @@ var Player = function  () {
 					return false;									// return false
 				}
 
-				this.bank -= (bet * factor);								// subtract from bank
-				this.bet[idx] =(bet * factor);								// set bet
+				this.bank -= (5 * factor);								// subtract from bank
+				this.bet[idx] =(5 * factor);								// set bet
+				return true;										// confirm
+													
+			case "split":
+
+				if (this.bet > this.bank) {								// if amount is greater than bank
+					return false;									// return false
+				}
+
+				this.bank -= (this.bet * factor);								// subtract from bank
+				this.bet[idx] =(this.bet * factor);							// set bet bet[1] is split bet
 				return true;										// confirm
 
 			case "lose":
@@ -113,6 +130,8 @@ var Player = function  () {
 		for (var i = 0; i < this.hands.length; i++) {								// for each player hand
 			this.hands[i].push(game.shoe.shoeDeal());							// get a card from the shoe and put in each hand.
 		}
+
+		this.playerAdjustFunds(1, "split", 1);
 		return;
 	};
 
@@ -165,6 +184,20 @@ var Player = function  () {
 		return this.insurance[idx];										// return insurance
 	};
 	
+	this.getPlayerWon = function () {										
+		return this.playerHandsWon;										// return hands won
+	};
 
+	this.getPlayerLost = function () {										
+		return this.playerHandsLost;										// return hands lost
+	};
+
+	this.getPlayerTied = function () {										
+		return this.playerHandsTied;										// return hands tied
+	};
+
+	this.getPlayerBank = function () {
+		return this.bank;											// return bank.
+	};
 	
 };

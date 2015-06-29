@@ -8,11 +8,11 @@
 <body class="background">
 	<div class="info-bar top-info">
 		<div class="game-msg">
-			<div class="hand-info hands-won">Won: <br>10</div>
-			<div class="hand-info hand-info hands-lost">Lost: <br>10</div>
-			<div class="hand-info pushed">Pushes: <br>10</div>
+			<div class="hand-info hands-won"></div>
+			<div class="hand-info hand-info hands-lost"></div>
+			<div class="hand-info pushed"></div>
 		</div>
-		<div class="game-msg messages">End    of     a  really long message</div>
+		<div class="game-msg banner"></div>
 		<div class="game-msg"></div>
 	</div>
 
@@ -42,14 +42,28 @@
 
 		
 		<div class="buttons">
-			<!-- <div class="btn"> Cash In</div> -->
-			<div class="btn"> Deal</div>
-			<div class="btn"> Insurance</div>
-			<div class="btn"> Bet</div>
-			<div class="btn"> Hit</div>
-			<div class="btn"> Stand</div>
-			<div class="btn"> Split</div>
-			<div class="btn"> Double Down</div>
+			
+			<div class="btn">
+				<img  class="btn-img" id="deal-btn" src="/home/andrew/BlackJack/blackjack_game/img/BTN_deal.png" alt="deal button"/>
+			</div>
+			<div class="btn"> 
+				<img  class="btn-img" id="bet-btn" src="/home/andrew/BlackJack/blackjack_game/img/BTN_bt.png" alt="deal button"/>
+			</div>
+			<div class="btn"> 
+				<img  class="btn-img" id="double-btn" src="/home/andrew/BlackJack/blackjack_game/img/BTN_dd.png" alt="deal button"/>
+			</div>
+			<div class="btn">
+				<img  class="btn-img" id="hit-btn" src="/home/andrew/BlackJack/blackjack_game/img/BTN_hit.png" alt="deal button"/>
+			</div>
+			<div class="btn"> 
+				<img  class="btn-img" id="stand-btn" src="/home/andrew/BlackJack/blackjack_game/img/BTN_st.png" alt="deal button"/>
+			</div>
+			<div class="btn"> 
+				<img  class="btn-img" id="split-btn" src="/home/andrew/BlackJack/blackjack_game/img/BTN_sp.png" alt="deal button"/>
+			</div>
+			<div class="btn"> 
+				<img  class="btn-img" id="insure-btn" src="/home/andrew/BlackJack/blackjack_game/img/BTN_is.png" alt="deal button"/>
+			</div>
 		<!-- 	<div class="btn"> Cash Out</div> -->
 		</div>
 	</div>
@@ -59,10 +73,10 @@
 
 	<div class="info-bar bottom-info">
 
-		<div class="player-monies" id="bank">Bank:<br>$75,000.00</div>
-		<div class="player-monies" id="bet">Player Bet:<br>$50.00</div>
-		<div class="player-monies" id="bet">Player Split Bet:<br>$50.00</div>
-		<div class="player-monies" id="insurance">Player Insurance Bet:<br>$50.00</div>
+		<div class="player-monies" id="bank"></div>
+		<div class="player-monies" id="bet"></div>
+		<div class="player-monies" id="split"></div>
+		<div class="player-monies" id="insurance"></div>
 
 
 	</div>

@@ -6,13 +6,15 @@ html, body {
 
 .background {
 	/*background: #000000 url('/home/andrew/Downloads/blackboop.jpg') no-repeat bottom left;*/
-	background: #000000 url('/home/andrew/Downloads/table.png') no-repeat bottom left;
+	background: #000000 url('../img/table.png') no-repeat bottom left;
+	/*background: #000000 url('/home/andrew/Downloads/Axial-M3-Black-Right.jpg') no-repeat bottom left;*/
 	background-size: 100% 100%;
 	width: 100%;
 	/*height: 100%;*/
 	height: auto !important;
 	min-height:100%;
 }
+
 
 .info-bar {
 	position: fixed;
@@ -37,7 +39,7 @@ html, body {
 .hand-info{
 	position: relative;
 	min-width: 20%;
-	color: red;
+	color: cornflowerblue;
 	display: inline-flex;
 	left: 3%;
 	top: 3%;
@@ -47,9 +49,9 @@ html, body {
 .player-monies {
 	position: relative;
 	width: 24%;
-	color: red;
+	color: cornflowerblue;
 	display: inline-flex;
-	left: 3%;
+	left: 6%;
 	top: 3%;
 	font-size: 115%;
 }
@@ -64,17 +66,17 @@ html, body {
  .game-msg {
 	position: relative;
 	width: 24%;
-	color: red;
+	color: cornflowerblue;
 	display: inline;
 	left: 3%;
 	top: 3%;
 	font-size: 100%;
 }
 
-.messages {
+.banner {
 	margin: 0;
 	position: relative;	
-	color: red;
+	color: cornflowerblue;
 	display: inline-flex;
 	text-align: center;
 	top: 70%;
@@ -88,7 +90,7 @@ html, body {
 .buttons {
 	display: inline-flex;
 	position: absolute;
-	bottom: 20px;
+	bottom: 37px;
 	margin: auto;
 	width: 90%;
 }
@@ -99,8 +101,9 @@ html, body {
 
 .btn {
 	min-height: 100px;
+	max-height: 100px;
 	min-width: 100px;
-	background-color: orange;
+	max-width: 100px;
 	margin: 5px;
 	margin-left: 10px;
 	padding: 5px;
@@ -108,11 +111,12 @@ html, body {
 	position: relative;
 	border-radius: 50%;
 	text-align: center;
-	border: 3px groove gray;
-	box-shadow: 6px 6px 5px black;
+	
+	/*box-shadow: 6px 6px 5px black;*/
 
 
 }
+
 .cards-holder {
 	min-width: 99%;
 	min-height: 691px;
@@ -124,14 +128,18 @@ html, body {
 	max-height: 90px;
 	width: 72px;
 	height: 90px;
+	padding-right: 2px;
+	padding-left: 2px;
 }
 
 #cardback {
 	min-width: 72px;
 	max-width: 72px;
-	min-height: 90px;
+	min-height: 110%;
 	max-height: 90px;
 	border-radius: 8%;
+	padding-right: 2px;
+	padding-left: 2px;
 }
 
 .dealer-hand {
@@ -146,4 +154,12 @@ html, body {
 	left: 39%;
 	top: 399px;
 	position: relative;
+}
+
+.btn-img {	
+	max-width: 145px;
+  	max-height: 171px;
+ 	position: relative;
+  	left: -14px;
+  	top: -4px;
 }

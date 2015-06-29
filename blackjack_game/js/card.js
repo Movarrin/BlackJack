@@ -1,4 +1,5 @@
 // card object
+console.log("card loaded");
 
 var Card = function  (suit, value, face) {
 	//properties
