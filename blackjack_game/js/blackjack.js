@@ -27,20 +27,20 @@ window.onload = function () {
 		$("#stand-btn").unbind();											// prevent multiple listeners
 		caller(fireStandListener);											// make listener
 
-		for (var i = 0; i < game.players[1].hands.length; i++) {
-			if (game.players[1].playerCanInsure(i)) {
-				caller(fireInsureListener);	
-			}
+		// for (var i = 0; i < game.players[1].hands.length; i++) {
+		// 	if (game.players[1].playerCanInsure(i)) {
+		// 		caller(fireInsureListener);	
+		// 	}
 
-			if (game.players[1].playerCanSplit(i)) {
-				caller(fireSplitListener);	
-			}
+		// 	if (game.players[1].playerCanSplit(i)) {
+		// 		caller(fireSplitListener);	
+		// 	}
 
-			if (game.players[1].playerCanDoubleDown(i)) {
-				caller(fireDoubleListener);	
-			}
+		// 	if (game.players[1].playerCanDoubleDown(i)) {
+		// 		caller(fireDoubleListener);	
+		// 	}
 
-		}
+		// }
 
 		renderGame();
 
@@ -130,6 +130,16 @@ window.onload = function () {
 		game.gameDetermineHandValues();
 		if (game.players[1].hands[0].handHasBusted){
 			game.gameBanner(game.gameResult());
+			msg();
+
+			$("#bet-btn").css("opacity", "1");
+			$('#bet-btn').click( actOnBet );
+			$("#stand-btn").css("opacity", "1");
+			$("#stand-btn").unbind().css("opacity", ".25");
+			$("#hit-btn").unbind().css("opacity", ".25");
+			$("#split-btn").unbind().css("opacity", ".25");
+
+
 			return;
 		}
 
@@ -205,11 +215,12 @@ window.onload = function () {
 		return;
 	};
 
+	var msg = function () {game.gameMsg();};									// get win/loss record
+	
 	var startUp = function () {
 
 		start = function () {game.gameStart();};									// create shoe, deck and players								
 
-		msg = function () {game.gameMsg();};									// get win/loss record
 		createHands = function () {game.gameAddHands();};								// create hand objects
 		banner = function () {game.gameBanner(0);};									// create banner message
 

@@ -53,7 +53,7 @@ var game = {
 			"Press 'Bet' to increase bet by $5.00. Press 'Deal' when ready for hand.",			// 0
 			"Press 'Insurance' if you want to buy Insurance against Dealer Blackjack!",			// 1
 			"You won.",											// 2
-			"You lost.",											// 3
+			"You lost. Press Bet to play next hand.",							// 3
 			"Blackjack. Pays 2.5!",										// 4
 			"Push."												// 5
 		];
