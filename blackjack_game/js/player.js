@@ -55,7 +55,7 @@ var Player = function  () {
 				return true;										// confirm
 				
 			case "winMoney": 										// do for either case.
-				this.bank += (bet * factor);								// add money to bank	
+				this.bank += (bet[idx] * factor);								// add money to bank	
 				this.doubleDown[idx] = 0;								// clear doubleDown
 				this.bet[idx] = 0;									// clear bet			
 				return true;										// confirm

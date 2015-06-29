@@ -110,7 +110,7 @@ window.onload = function () {
 	var actOnBet = function(clicked) {
 		console.log("bet clicked");
 		game.gamePlayerBet();
-		bottomBanner();
+		bottomBanner(0);
 		$("#deal-btn").css("opacity", "1");
 		$("#deal-btn").unbind();											// prevent multiple listeners
 		caller(fireDealListener);											// make listener
@@ -138,6 +138,7 @@ window.onload = function () {
 			$("#stand-btn").unbind().css("opacity", ".25");
 			$("#hit-btn").unbind().css("opacity", ".25");
 			$("#split-btn").unbind().css("opacity", ".25");
+			renderGame();
 
 
 			return;
@@ -150,9 +151,17 @@ window.onload = function () {
 		$("#insure-btn").unbind().attr("opacity", ".25");
 		$("#double-btn").unbind().attr("opacity", ".25");
 		$("#split-btn").unbind().attr("opacity", ".25");
-		// game.players[1].playerHit();
+		
 		game.dealerPlay();
 		game.gameBanner(game.gameResult());
+		msg();
+
+			$("#bet-btn").css("opacity", "1");
+			$('#bet-btn').click( actOnBet );
+			$("#stand-btn").css("opacity", "1");
+			$("#stand-btn").unbind().css("opacity", ".25");
+			$("#hit-btn").unbind().css("opacity", ".25");
+			$("#split-btn").unbind().css("opacity", ".25");
 
 		renderGame();
 		return;

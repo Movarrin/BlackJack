@@ -181,12 +181,17 @@ var game = {
 					this.players[ i ].playerAdjustFunds( j, "lose", 1 ); 				// call with hand idx, action and factor
 					this.players[i].playerLost();
 					return 3;									// return bust
-				} else if (game.dealerHandValue == playerHandValue[ j ]) {				// --> push <--
+				} else if (dealerBust) {			
+					this.players[ i ].playerAdjustFunds( j, "winMoney", 2 ); 			// call with hand idx, action and factor
+					this.players[i].playerWon();
+					return 2;									// return win	
+
+				} else if (dealerHandValue == playerHandValue[ j ]) {					// --> push <--
 					this.players[ i ].playerAdjustFunds( j, "winMoney", 1 ); 			// return bet to bank.
 					this.players[i].playerPush();
 					return 5;									// confirm
 				
-				} else if (game.dealerHandValue > playerHandValue[ i ]) {				// player loses.
+				} else if ( dealerHandValue > playerHandValue[ j ]) {					// player loses.
 
 					if (dealerBlackjack) {								// if player lost to blackjack
 
@@ -202,17 +207,15 @@ var game = {
 					return 3;									// return "lose"
 					}	
 
-				} else if (game.dealerHandValue < playerHandValue[ i ] ){
+				} else if (dealerHandValue < playerHandValue[ j ] ){
 
-					if (game.playerBlackjack[ i ]) {							// blackjack pay out
+					if (playerBlackjack[ j ]) {							// blackjack pay out
 						this.players[ i ].playerAdjustFunds( j, "winMoney", 2.5 ); 		// call with hand idx, action and factor
-						this.players[ i ].playerAdjustFunds( j, "lose", 1 ); 			// call with hand idx, action and factor
 						this.players[i].playerWon();
 						return 4;								// return blackjack
 												
 					} else {									// normal win payout
 						this.players[ i ].playerAdjustFunds( j, "winMoney", 2 ); 		// call with hand idx, action and factor
-						this.players[ i ].playerAdjustFunds( j, "lose", 1 ); 			// call with hand idx, action and factor
 						this.players[i].playerWon();
 						return 2;								// return win	
 					}	
