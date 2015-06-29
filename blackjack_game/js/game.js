@@ -194,7 +194,7 @@ var game = {
 				} else if ( dealerHandValue > playerHandValue[ j ]) {					// player loses.
 
 					if (dealerBlackjack) {								// if player lost to blackjack
-
+															// added silly comment
 					this.players[ i ].playerAdjustFunds( j, "winInsurance", 2 ); 			// call with hand idx, action and factor
 					this.players[ i ].playerAdjustFunds( j, "lose", 1 ); 				// call with hand idx, action and factor
 					this.players[i].playerLost();
