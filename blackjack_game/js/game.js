@@ -94,6 +94,8 @@ var game = {
 	},
 
 	gameRender: function () {
+
+		this.gameRendered = [];
 		
 
 		for ( var i = 0; i < this.players.length; i++ ) {
@@ -163,7 +165,7 @@ var game = {
 			
 				playerBlackjack.push( game.players[ i ].playerHasBlackjack( j ) );			// find out if blackjack and push into arry
 				playerBust.push( game.players[ i ].playerHasBusted( j ) );				// find out if busted and push into array
-				playerHandValue.push( game.players[ i ].playerGetValue( j ) );				// get hand value and push into array
+				playerHandValue.push( game.players[ i ].playerGetValue( j ) );			// get hand value and push into array
 
 
 				if (playerBust[ j ]) {									// if busted he loses regardless of anything else.								

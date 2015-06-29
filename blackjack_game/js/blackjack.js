@@ -15,6 +15,7 @@ window.onload = function () {
 		console.log("deal clicked");
 		game.gameDeal();												// deal cards.
 		bottomBanner();
+		game.gameCheckForOutOfCards();
 		$("#bet-btn").unbind();											// turn off bet listener.
 		$("#bet-btn").css("opacity", ".25");										// gray out button
 		$("#deal-btn").unbind();											// turn off deal listener.
@@ -25,7 +26,24 @@ window.onload = function () {
 		caller(fireHitListener);												// make listener
 		$("#stand-btn").unbind();											// prevent multiple listeners
 		caller(fireStandListener);											// make listener
+
+		for (var i = 0; i < game.players[1].hands.length; i++) {
+			if (game.players[1].playerCanInsure(i)) {
+				caller(fireInsureListener);	
+			}
+
+			if (game.players[1].playerCanSplit(i)) {
+				caller(fireSplitListener);	
+			}
+
+			if (game.players[1].playerCanDoubleDown(i)) {
+				caller(fireDoubleListener);	
+			}
+
+		}
+
 		renderGame();
+
 
 		return;
 
@@ -43,6 +61,15 @@ window.onload = function () {
 		var imgNames = ["dlr-", "ply-"];
 		var handName= "";
 		var imgName = "";
+		var handsToEmpty = 0;
+		handsToEmpty = (game.players.length + (game.players[1].hands.length - 1));
+
+		for (var z = 0; z < handsToEmpty; z++) {
+			handName = ".hand" + z;
+			$(handName).empty();
+
+		}
+
 
 		for (var i = 0; i < gameCards.length; i++ ) {									// players
 
@@ -92,23 +119,69 @@ window.onload = function () {
 		
 	};
 
+
+	var actOnHit = function () {
+		$("#insure-btn").unbind().attr("opacity", ".25");
+		$("#double-btn").unbind().attr("opacity", ".25");
+		$("#split-btn").unbind().attr("opacity", ".25");
+
+		game.players[1].playerHit(0);
+		renderGame();
+		game.gameCheckForOutOfCards();
+	};
+	var actOnStand = function () {
+		$("#hit-btn").unbind().attr("opacity", ".25");
+		$("#insure-btn").unbind().attr("opacity", ".25");
+		$("#double-btn").unbind().attr("opacity", ".25");
+		$("#split-btn").unbind().attr("opacity", ".25");
+		// game.player[1].playerHit();
+		renderGame();
+	};
+	var actOnSplit = function () {
+		$("#insure-btn").unbind().attr("opacity", ".25");
+		$("#split-btn").unbind().attr("opacity", ".25");
+
+		// game.player[1].playerHit();
+		renderGame();
+	};
+	var actOnInsure = function () {
+		$("#insure-btn").unbind().attr("opacity", ".25");
+		// game.player[1].playerHit();
+		renderGame();
+	};
+	var actOnDouble = function () {
+		$("#hit-btn").unbind().attr("opacity", ".25");
+		$("#insure-btn").unbind().attr("opacity", ".25");
+		$("#double-btn").unbind().attr("opacity", ".25");
+		$("#split-btn").unbind().attr("opacity", ".25");
+		game.player[1].playerHit();
+		renderGame();
+	};
+
+
 	fireDealListener = function () {
+		$("#deal-btn").unbind();
 		$("#deal-btn").click( actOnDeal ); 
 	};	
 	fireHitListener = function () {
-		$("#deal-btn").click( actOnDeal ); 
+		$("#hit-btn").unbind();
+		$("#hit-btn").click( actOnHit ); 
 	};
 	fireStandListener = function () {
-		$("#deal-btn").click( actOnDeal ); 
+		$("#stand-btn").unbind();
+		$("#stand-btn").click( actOnStand ); 
 	};
 	fireSplitListener = function () {
-		$("#deal-btn").click( actOnDeal ); 
+		$("#split-btn").unbind();
+		$("#split-btn").click( actOnSplit ); 
 	};
 	fireDoubleListener = function () {
-		$("#deal-btn").click( actOnDeal ); 
+		$("#double-btn").unbind();
+		$("#double-btn").click( actOnDouble ); 
 	};
-	fireInsuranceListener = function () {
-		$("#deal-btn").click( actOnDeal ); 
+	fireInsureListener = function () {
+		$("#insure-btn").unbind();
+		$("#insure-btn").click( actOnInsure ); 
 	};
 
 	var startUp = function () {
