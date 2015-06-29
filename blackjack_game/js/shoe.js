@@ -40,14 +40,15 @@ var Shoe = function() {
 
 	this.shuffle = function() {
 		shuffle(this.decks);											// shuffle function. Not my code.
-															// this operates on the cards in place. no new variable needed.
-		// USE THIS TO SHUFFLE YOUR NUMBERS
-		//+ Jonas Raoni Soares Silva
-		//@ http://jsfromhell.com/array/shuffle [v1.0]
-		function shuffle(o){ //v1.0
-			for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-		return o;
-		} 
-
+		for (var s = 0; s < 10; s++) {										
+														// this operates on the cards in place. no new variable needed.
+			// USE THIS TO SHUFFLE YOUR NUMBERS
+			//+ Jonas Raoni Soares Silva
+			//@ http://jsfromhell.com/array/shuffle [v1.0]
+			function shuffle(o){ //v1.0
+				for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+			return o;
+			} 
+		}
 	};
 };
