@@ -127,6 +127,12 @@ window.onload = function () {
 
 		game.players[1].playerHit(0);
 		renderGame();
+		game.gameDetermineHandValues();
+		if (game.players[1].hands[0].handHasBusted){
+			game.gameBanner(game.gameResult());
+			return;
+		}
+
 		game.gameCheckForOutOfCards();
 	};
 	var actOnStand = function () {
@@ -134,8 +140,12 @@ window.onload = function () {
 		$("#insure-btn").unbind().attr("opacity", ".25");
 		$("#double-btn").unbind().attr("opacity", ".25");
 		$("#split-btn").unbind().attr("opacity", ".25");
-		// game.player[1].playerHit();
+		// game.players[1].playerHit();
+		game.dealerPlay();
+		game.gameBanner(game.gameResult());
+
 		renderGame();
+		return;
 	};
 	var actOnSplit = function () {
 		$("#insure-btn").unbind().attr("opacity", ".25");
@@ -143,45 +153,56 @@ window.onload = function () {
 
 		// game.player[1].playerHit();
 		renderGame();
+		return;
 	};
 	var actOnInsure = function () {
 		$("#insure-btn").unbind().attr("opacity", ".25");
-		// game.player[1].playerHit();
+		// game.players[1].playerHit();
 		renderGame();
+		return;
 	};
 	var actOnDouble = function () {
+		console.log("DD click");
 		$("#hit-btn").unbind().attr("opacity", ".25");
 		$("#insure-btn").unbind().attr("opacity", ".25");
 		$("#double-btn").unbind().attr("opacity", ".25");
 		$("#split-btn").unbind().attr("opacity", ".25");
-		game.player[1].playerHit();
+		game.players[1].playerHit();
+		game.dealerPlay();
 		renderGame();
+		return;
 	};
 
 
 	fireDealListener = function () {
 		$("#deal-btn").unbind();
-		$("#deal-btn").click( actOnDeal ); 
+		$("#deal-btn").click( actOnDeal ).css("opacity", "1"); 
+		return;
 	};	
 	fireHitListener = function () {
 		$("#hit-btn").unbind();
-		$("#hit-btn").click( actOnHit ); 
+		$("#hit-btn").click( actOnHit ).css("opacity", "1");
+		return;
 	};
 	fireStandListener = function () {
 		$("#stand-btn").unbind();
-		$("#stand-btn").click( actOnStand ); 
+		$("#stand-btn").click( actOnStand ).css("opacity", "1");
+		return;
 	};
 	fireSplitListener = function () {
 		$("#split-btn").unbind();
-		$("#split-btn").click( actOnSplit ); 
+		$("#split-btn").click( actOnSplit ).css("opacity", "1");
+		return;
 	};
 	fireDoubleListener = function () {
 		$("#double-btn").unbind();
-		$("#double-btn").click( actOnDouble ); 
+		$("#double-btn").click( actOnDouble ).css("opacity", "1");
+		return;
 	};
 	fireInsureListener = function () {
 		$("#insure-btn").unbind();
-		$("#insure-btn").click( actOnInsure ); 
+		$("#insure-btn").click( actOnInsure ).css("opacity", "1");
+		return;
 	};
 
 	var startUp = function () {

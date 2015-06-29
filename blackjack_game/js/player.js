@@ -157,7 +157,7 @@ var Player = function  () {
 	};	
 
 	this.playerHasBusted = function (idx) {
-		return (this.hands[idx].handHasBusted());								// call handHasBusted and return result
+		return (this.hands[idx].hasThisHandBusted());								// call handHasBusted and return result
 	};
 
 	this.playerRender = function (idx) {

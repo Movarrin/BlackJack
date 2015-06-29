@@ -113,11 +113,11 @@ var Hand = function() {
 		return this.handDoesHaveBlackjack;								// return answer
 	};
 
-	this.handHasBusted = function () {									// determine if busted
+	this.hasThisHandBusted = function () {								// determine if busted
 		if (this.totValAceLow > 21) {									// if even with ace counted as one
 			this.handHasBusted = true;								// hand busted
-			this.totValAceLow = 0;									// busted hand has no value
-			this.totValAceHigh = 0;								// busted hand has no value
+			// this.totValAceLow = 0;									// busted hand has no value
+			// this.totValAceHigh = 0;								// busted hand has no value
 		} else {
 			this.handHasBusted = false;								// hasn't busted
 		}
@@ -156,7 +156,7 @@ var Hand = function() {
 
 		if ( !this.handHasAce ) {									// if no ace
 			return this.totValAceHigh;								// there is only 1 value
-		} else if ( totValAceHigh > 21 ) {								// else with the ace = 11 hand busted
+		} else if ( this.totValAceHigh > 21 ) {								// else with the ace = 11 hand busted
 			return this.totValAceLow;								// return value with Ace =1 
 		} else if ( ( this.handHasAce ) && (totValAceHigh <= 21) ){ 					// else with ace = 11
 			return totValAceHigh;									// return value

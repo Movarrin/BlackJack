@@ -51,7 +51,11 @@ var game = {
 	gameBanner: function (idx) {
 		var gameBanners = [
 			"Press 'Bet' to increase bet by $5.00. Press 'Deal' when ready for hand.",			// 0
-			"Press 'Insurance' if you want to buy Insurance against Dealer Blackjack!"	,		// 1
+			"Press 'Insurance' if you want to buy Insurance against Dealer Blackjack!",			// 1
+			"You won.",											// 2
+			"You lost.",											// 3
+			"Blackjack. Pays 2.5!",										// 4
+			"Push."												// 5
 		];
 
 		var  bannerColors = [
@@ -106,9 +110,15 @@ var game = {
 
 	},	
 
+	gameDeal: function () {
+		for (var z = 0; z < this.players.length; z++) {
+			this.players[z].hands = [];									// kill old hands if any.
+		}
+
+		this.gameAddHands();
+
 	/* this is an inside-out loop, it stops at each player, giving them each 1 card starting with the player first
 		before dealing a second card to each. There are only 2 cards per hand. Dealer is alway game.playerers[0];*/
-	gameDeal: function () {
 
 		for ( var i = 0; i < 2; i++ ) {										// 2 cards in each hand
 
@@ -140,9 +150,8 @@ var game = {
 				game.players[ m ].hands[ n ].canHandSplit();						// can hand split
 				game.players[ m ].hands[ n ].canHandDoubleDown();					// can hand split
 				game.players[ m ].hands[ n ].canHandInsure();					// can hand split
-				game.players[ m ].hands[ n ].canHandInsure();					// can hand split
 				game.players[ m ].hands[ n ].handHasBlackjack();					// can hand split
-				game.players[ m ].hands[ n ].handHasBusted();					// can hand split
+				game.players[ m ].hands[ n ].hasThisHandBusted();					// can hand split
 
 
 			}
@@ -170,23 +179,27 @@ var game = {
 
 				if (playerBust[ j ]) {									// if busted he loses regardless of anything else.								
 					this.players[ i ].playerAdjustFunds( j, "lose", 1 ); 				// call with hand idx, action and factor
-					return ("bust");									// return bust
+					this.players[i].playerLost();
+					return 3;									// return bust
 				} else if (game.dealerHandValue == playerHandValue[ j ]) {				// --> push <--
 					this.players[ i ].playerAdjustFunds( j, "winMoney", 1 ); 			// return bet to bank.
-					return "winMoney";								// confirm
-			
+					this.players[i].playerPush();
+					return 5;									// confirm
+				
 				} else if (game.dealerHandValue > playerHandValue[ i ]) {				// player loses.
 
 					if (dealerBlackjack) {								// if player lost to blackjack
 
 					this.players[ i ].playerAdjustFunds( j, "winInsurance", 2 ); 			// call with hand idx, action and factor
 					this.players[ i ].playerAdjustFunds( j, "lose", 1 ); 				// call with hand idx, action and factor
-					return ("lose");									// return lose
+					this.players[i].playerLost();
+					return (3);									// return lose
 						
 					} else if (!dealerBlackjack) {							// not blackjack
 
 					this.players[ i ].playerAdjustFunds( j, "lose", 1 ); 				// call with hand idx, action and factor
-					return ("lose");									// return "lose"
+					this.players[i].playerLost();
+					return 3;									// return "lose"
 					}	
 
 				} else if (game.dealerHandValue < playerHandValue[ i ] ){
@@ -194,39 +207,33 @@ var game = {
 					if (game.playerBlackjack[ i ]) {							// blackjack pay out
 						this.players[ i ].playerAdjustFunds( j, "winMoney", 2.5 ); 		// call with hand idx, action and factor
 						this.players[ i ].playerAdjustFunds( j, "lose", 1 ); 			// call with hand idx, action and factor
-						return ( "blackjack" );							// return blackjack
+						this.players[i].playerWon();
+						return 4;								// return blackjack
 												
 					} else {									// normal win payout
 						this.players[ i ].playerAdjustFunds( j, "winMoney", 2 ); 		// call with hand idx, action and factor
 						this.players[ i ].playerAdjustFunds( j, "lose", 1 ); 			// call with hand idx, action and factor
-						return ( "win" );							// return win	
-					}
+						this.players[i].playerWon();
+						return 2;								// return win	
+					}	
 				}
 			}
 			
 		}
 	},
 
-	/*gamePlayerTurns: function () {
-		turn off deal button
-		check for deal ace showing
-			if yes, ask for insurance
-		evaluate hand. can split? can double down?
-		hit, stand activated.
-		check for out of cards
 
+
+	dealerPlay: function () {
+		this.players[0].hands[0].cards[1].showFace();
+
+		while (this.players[0].hands[0].totValAceLow < 17) {
+			this.players[0].playerHit(0);
+			this.gameDetermineHandValues();
+
+		}
 
 	},
-
-	gameDealerTurns: function () {
-		turn over hole card
-		check for dealer blackjack
-		check for <= 16
-		hit or stand
-		check for <= 16
-		check for out of cards
-
-	},*/
 
 	gameCashIn: function () {
 		for (var i = 1; i < this.players.length; i++) {								// skipping deal give each player 50K
@@ -235,19 +242,8 @@ var game = {
 
 	},
 
-	// gameCashOut: function () {
-
-	// },
-
 	gamePlayerBet: function () {
 		this.players[1].playerAdjustFunds(0, "bet", 1) ;
 	},
-
-	// gameAdjustMoney: function () {
-	// 	cash out
-
-	// }
-
-
 
 };
