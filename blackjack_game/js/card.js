@@ -1,6 +1,8 @@
 // card object
 console.log("card loaded");
 
+// adding some comments to test git.
+
 var Card = function  (suit, value, face, imgFace) {
 	//properties
 	this.value = value;											// the value of the card 1 to 13
